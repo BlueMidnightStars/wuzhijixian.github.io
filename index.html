@@ -341,6 +341,224 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/24/vue_2019-4-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="午夜星空">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/24/vue_2019-4-24/" class="post-title-link" itemprop="url">熟悉vue的计算属性，Vuex及自定义指令</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-24 23:29:04" itemprop="dateCreated datePublished" datetime="2019-04-24T23:29:04+08:00">2019-04-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-25 00:48:14" itemprop="dateModified" datetime="2019-04-25T00:48:14+08:00">2019-04-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="今天操作了todos的vue操作，简单讲解一下里面的新鲜知识点"><a href="#今天操作了todos的vue操作，简单讲解一下里面的新鲜知识点" class="headerlink" title="今天操作了todos的vue操作，简单讲解一下里面的新鲜知识点"></a>今天操作了todos的vue操作，简单讲解一下里面的新鲜知识点</h2><h1 id="计算属性与侦听器"><a href="#计算属性与侦听器" class="headerlink" title="计算属性与侦听器"></a>计算属性与侦听器</h1><p>计算属性事件里的数据一旦发生变化，事件就会重新计算并返回计算号的值；<br>计算属性在computed中定义，可以直接定义事件,事件直接返回数据，也就是单独的get事件，也可以定义一个对象，对象里可以有两个事件，一个是set，一个是get，get一般用来读取数据，set一般用来操作数据;set事件可以接受参数值；</p>
+<p>计算属性一般用来页面渲染操作较多;</p>
+<p>例子</p>
+<h2 id="计算属性：直接定义事件例子"><a href="#计算属性：直接定义事件例子" class="headerlink" title="计算属性：直接定义事件例子"></a>计算属性：直接定义事件例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: &apos;#demo&apos;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    firstName: &apos;Foo&apos;,</span><br><span class="line">    lastName: &apos;Bar&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    fullName: function () &#123;</span><br><span class="line">      return this.firstName + &apos; &apos; + this.lastName</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="计算属性：对象例子"><a href="#计算属性：对象例子" class="headerlink" title="计算属性：对象例子"></a>计算属性：对象例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  fullName: &#123;</span><br><span class="line">    // getter</span><br><span class="line">    get: function () &#123;</span><br><span class="line">      return this.firstName + &apos; &apos; + this.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    // setter</span><br><span class="line">    set: function (newValue) &#123;</span><br><span class="line">      var names = newValue.split(&apos; &apos;)</span><br><span class="line">      this.firstName = names[0]</span><br><span class="line">      this.lastName = names[names.length - 1]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="侦听器"><a href="#侦听器" class="headerlink" title="侦听器"></a>侦听器</h2><p>当需要在数据变化时执行异步或开销较大的操作时</p>
+<p>一般操作数据不需要渲染时</p>
+<p>直接操作数据，也可以异步回调</p>
+<p><strong>例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var watchExampleVM = new Vue(&#123;</span><br><span class="line">  el: &apos;#watch-example&apos;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    question: &apos;&apos;,</span><br><span class="line">    answer: &apos;I cannot give you an answer until you ask a question!&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    // 如果 `question` 发生改变，这个函数就会运行</span><br><span class="line">    question: function (newQuestion, oldQuestion) &#123;</span><br><span class="line">      this.answer = &apos;Waiting for you to stop typing...&apos;</span><br><span class="line">      this.debouncedGetAnswer()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created: function () &#123;</span><br><span class="line">    // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。</span><br><span class="line">    // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率</span><br><span class="line">    // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于</span><br><span class="line">    // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，</span><br><span class="line">    // 请参考：https://lodash.com/docs#debounce</span><br><span class="line">    this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getAnswer: function () &#123;</span><br><span class="line">      if (this.question.indexOf(&apos;?&apos;) === -1) &#123;</span><br><span class="line">        this.answer = &apos;Questions usually contain a question mark. ;-)&apos;</span><br><span class="line">        return</span><br><span class="line">      &#125;</span><br><span class="line">      this.answer = &apos;Thinking...&apos;</span><br><span class="line">      var vm = this</span><br><span class="line">      axios.get(&apos;https://yesno.wtf/api&apos;)</span><br><span class="line">        .then(function (response) &#123;</span><br><span class="line">          vm.answer = _.capitalize(response.data.answer)</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(function (error) &#123;</span><br><span class="line">          vm.answer = &apos;Error! Could not reach the API. &apos; + error</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h1><p>vue cli中定义自定义指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">directives: &#123;</span><br><span class="line">  focus: &#123;</span><br><span class="line">    // 指令的定义</span><br><span class="line">    inserted: function (el) &#123;</span><br><span class="line">      el.focus()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-focus&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h2><p>一个指令定义对象可以提供如下几个钩子函数 (均为可选)：</p>
+<p>bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。</p>
+<p>inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。</p>
+<p>update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。但是你可以通过比较更新前后的值来忽略不必要的模板更新 (详细的钩子函数参数见下)。</p>
+<p>我们会在稍后讨论渲染函数时介绍更多 VNodes 的细节。</p>
+<p>componentUpdated：指令所在组件的 VNode 及其子 VNode 全部更新后调用。</p>
+<p>unbind：只调用一次，指令与元素解绑时调用。</p>
+<h2 id="钩子函数参数"><a href="#钩子函数参数" class="headerlink" title="钩子函数参数"></a>钩子函数参数</h2><p>指令钩子函数会被传入以下参数：</p>
+<p>el：指令所绑定的元素，可以用来直接操作 DOM 。<br>binding：一个对象，包含以下属性：<br>name：指令名，不包括 v- 前缀。</p>
+<p>value：指令的绑定值，例如：v-my-directive=”1 + 1” 中，绑定值为 2。</p>
+<p>oldValue：指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。<br>expression：字符串形式的指令表达式。例如 v-my-directive=”1 + 1” 中，表达式为 “1 + 1”。<br>arg：传给指令的参数，可选。例如 v-my-directive:foo 中，参数为 “foo”。</p>
+<p>modifiers：一个包含修饰符的对象。例如：v-my-directive.foo.bar 中，修饰符对象为 { foo: true, bar: true }。</p>
+<p>vnode：Vue 编译生成的虚拟节点。移步 VNode API 来了解更多详情。<br>oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。</p>
+<h1 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h1><p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化</p>
+<p>可以定义全局函数及事件，让vue中所有的父组件和子组件都能直接调用，而不用依靠组件之间相互传参</p>
+<h3 id="什么情况下我应该使用-Vuex？"><a href="#什么情况下我应该使用-Vuex？" class="headerlink" title="什么情况下我应该使用 Vuex？"></a>什么情况下我应该使用 Vuex？</h3><p>Vuex 可以帮助我们管理共享状态，并附带了更多的概念和框架。这需要对短期和长期效益进行权衡。</p>
+<p>如果您不打算开发大型单页应用，使用 Vuex 可能是繁琐冗余的。确实是如此——如果您的应用够简单，您最好不要使用 Vuex。一个简单的 store 模式就足够您所需了。但是，如果您需要构建一个中大型单页应用，您很可能会考虑如何更好地在组件外部管理状态，Vuex 将会成为自然而然的选择。引用 Redux 的作者 Dan Abramov 的话说就是：</p>
+<p>Flux 架构就像眼镜：您自会知道什么时候需要它。</p>
+<p>安装</p>
+<p>通过npm安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">npm install vuex --save</span><br></pre></td></tr></table></figure>
+<p>然后全局使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import Vuex from &apos;vuex&apos;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br></pre></td></tr></table></figure>
+<p>如果是用vue cli建立的话，<br>可以在vue cli创建的文件夹中的store.js中使用vuex</p>
+<p>例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: 0</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">	  doneTodosCount: (state, getters) =&gt; &#123;</span><br><span class="line">	    return getters.doneTodos.length</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment (state) &#123;</span><br><span class="line">      state.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">store.commit(&apos;increment&apos;)</span><br><span class="line"></span><br><span class="line">console.log(store.state.count) // -&gt; 1</span><br></pre></td></tr></table></figure>
+<p>在state中定义数据，在getters中返回数据，在mutations中写入事件，</p>
+<p>getters和mutations中的事件都会接受第一个参数，就是state(定义数据)本身;</p>
+<p>因为Vuex绑定在vue中，所以可以通过this.$store来获取到Vuex</p>
+<p>getters中的事件通过this.$store.getters.doneTodosCount来调用事件</p>
+<p>mutations中的事件通过this.$store.commit(‘事件名’)来调用事件</p>
+<p>还有其他事件，稍后补充</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/hexo_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -386,12 +604,24 @@
                 
               
 
-              <time title="创建时间：2019-04-22 21:20:47 / 修改时间：22:12:32" itemprop="dateCreated datePublished" datetime="2019-04-22T21:20:47+08:00">2019-04-22</time>
+              <time title="创建时间：2019-04-22 21:20:47" itemprop="dateCreated datePublished" datetime="2019-04-22T21:20:47+08:00">2019-04-22</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-24 23:32:26" itemprop="dateModified" datetime="2019-04-24T23:32:26+08:00">2019-04-24</time>
               
             
           </span>
@@ -956,7 +1186,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -973,7 +1203,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   
                 </div>
@@ -990,7 +1222,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
